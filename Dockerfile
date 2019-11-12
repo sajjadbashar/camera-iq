@@ -1,7 +1,5 @@
-FROM gradle:jdk11
-RUN git clone https://github.com/sajjadbashar/camera-iq.git
-RUN ./camera-iq/gradlew bootJar
-USER root
+FROM gradle:jdk11 AS base
+COPY . .
+RUN ./gradlew bootJar
 EXPOSE 8080
-ENTRYPOINT ["sh","-c","./camera-iq/build/libs/cameraIQ-0.0.1-SNAPSHOT.jar"]
-
+ENTRYPOINT ["sh","-c","./build/libs/cameraIQ-0.0.1-SNAPSHOT.jar"]
